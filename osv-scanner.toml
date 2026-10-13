@@ -1,0 +1,10 @@
+# osv-scanner suppressions for the Java SDK.
+[[IgnoredVulns]]
+id = "GHSA-5jmj-h7xm-6q6v"
+# False positive against jackson-databind 2.18.9. The advisory (and the OSV
+# record's own enumerated `versions` list) mark the 2.18 line as fixed in
+# 2.18.9; only the range event is malformed (introduced 2.8.0 with no closing
+# `fixed`), so osv-scanner treats it as unbounded. The flaw also requires
+# @JsonFormat(ACCEPT_CASE_INSENSITIVE_PROPERTIES) combined with per-property
+# @JsonIgnoreProperties, neither of which this SDK's plain deserialization uses.
+reason = "Fixed in jackson-databind 2.18.9 (OSV range data malformed); not reachable in this SDK."
